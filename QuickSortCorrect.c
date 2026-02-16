@@ -65,5 +65,3 @@ int main()
     printf("\n The array after Sorting using Quick Sort is \n");
     print(arr, n);
 }
-
-whats the error
