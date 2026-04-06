@@ -1,17 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 static int count = 0;
-void InsertionSort(int *arr, int n){
-    for(int i=1;i<n;i++){
+void InsertionSort(int *arr, int n)
+{
+    for (int i = 1; i < n; i++)
+    {
         int keys = arr[i];
-        int prev = i-1;
-        count+=2;
-        while(prev>=0 && arr[prev]>keys){
-            count+=2;
-            arr[prev+1]=arr[prev];
+        int prev = i - 1;
+        count += 2;
+        while (prev >= 0 && arr[prev] > keys)
+        {
+            count += 2;
+            arr[prev + 1] = arr[prev];
             prev--;
         }
-        arr[prev+1]=keys;
+        arr[prev + 1] = keys;
         count++;
     }
 }
