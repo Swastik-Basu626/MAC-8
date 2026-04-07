@@ -8,7 +8,7 @@ int getMax(int arr[], int n)
     int max = arr[0];
     for (int i = 1; i < n; i++)
     {
-        if (arr[1] > max)
+        if (arr[i] > max)
         {
             max = arr[i];
         }
@@ -41,23 +41,31 @@ void BucketSort(int arr[], int n)
         buckets[i] = (int *)malloc(sizeof(int) * n);
     }
 
+    int max = getMax(arr, n);
+
     for (int i = 0; i < n; i++)
     {
-        int position = (arr[i] * BUCKETS) / getMax(arr, n) + 1;
-
+        int position = (arr[i] * BUCKETS) / (max + 1);
         buckets[position][count[position]++] = arr[i];
     }
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < BUCKETS; i++)
     {
         insertionSort(buckets[i], count[i]);
     }
 
-    int k=0;
-    for(int i=0;i<BUCKETS;i++){
-        for(int j=0;j<count[i];j++){
-            arr[k++]=buckets[i][j];
+    int k = 0;
+    for (int i = 0; i < BUCKETS; i++)
+    {
+        for (int j = 0; j < count[i]; j++)
+        {
+            arr[k++] = buckets[i][j];
         }
+    }
+
+    for (int i = 0; i < BUCKETS; i++)
+    {
+        free(buckets[i]);
     }
 }
 int main()
@@ -66,7 +74,7 @@ int main()
     printf("Enter the number of array elements\n");
     scanf("%d", &n);
     int *arr = (int *)malloc(sizeof(int) * n);
-    printf("\nEnter the elements into the array from 0 to 1\n");
+    printf("\nEnter the elements into the array\n");
     for (int i = 0; i < n; i++)
     {
         scanf("%d", &arr[i]);
@@ -74,7 +82,7 @@ int main()
     printf("\nArray before sorting\n");
     for (int i = 0; i < n; i++)
     {
-        printf("%d", arr[i]);
+        printf("%d ", arr[i]);
     }
 
     BucketSort(arr, n);
@@ -82,6 +90,6 @@ int main()
     printf("\nArray after sorting\n");
     for (int i = 0; i < n; i++)
     {
-        printf("%d", arr[i]);
+        printf("%d ", arr[i]);
     }
 }
